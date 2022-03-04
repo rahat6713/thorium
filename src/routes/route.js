@@ -3,10 +3,37 @@ const router = express.Router();
 // const UserModel= require("../models/userModel.js")
 const UserController= require("../controllers/userController")
 const BookController= require("../controllers/bookController")
+const Mid=require("../Middlewares/myMiddleware")
 
 router.get("/test-me", function (req, res) {
     res.send("My first ever api!")
 })
+
+
+const mid1= function(req,res,next) {
+    let logged=false
+    if(logged==true) {
+        next()
+    }
+    else{
+        res.send("not authorized")
+    }
+}
+
+router.get("/getlog",mid1, Mid.basicCode)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 router.post("/createUser", UserController.createUser  )
 
